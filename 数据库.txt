@@ -1,0 +1,70 @@
+·控制事务语句
+set autocommit，start transaction，start transaction，commit，rollback等
+jdbc控制事务
+conn.commit...
+
+
+·spring控制事务
+先在applicationContext中配置事务管理文件和对事务注解的支持，然后就能够在程序中使用@Transactional注解来控制事务
+propagation	枚举型：Propagation	（可选）事务传播行为。例如：propagation=Propagation.REQUIRES_NEW
+
+readOnly	布尔型	是否为只读型事务。例如：readOnly=false
+
+isolation	枚举型：isolation	（可选）事务隔离级别。例如：isolation=Isolation.READ_COMMITTED
+
+timeout	int型（单位：秒）	事务超时时间。例如：timeout=20
+
+rollbackFor	一组Class类的实例，必须继承自Throwable	一组异常类，遇到时必须进行回滚。例如：rollbackFo{SQLException.class,ArithmeticException.class}
+
+rollbackForClassName	一组Class类的名称，必须继承自Throwable	一组异常类名，遇到时必须进行回滚。例如：rollbackForClassName={"SQLException","ArithmeticException"}
+
+noRollbackFor	一组Class类的实例，必须继承自Throwable	一组异常类，遇到时必须不回滚
+
+noRollbackForClassName	一组Class类的名称，必须继承自Throwable	一组异常类名，遇到时必须不回滚
+
+
+·事务的特点
+1.原子性：事务（transaction）的所有操作，要么全部完成，要么都不完成，事务发生错误会被回滚到原来的状态
+2.一致性：事务不会对数据库的完整性造成破坏
+3.隔离性：数据库允许多个并发事务同时进行读写和修改的能力，防止多个事务交叉执行而导致数据的不一致
+4.持久性：事务处理完毕后，对数据的修改时永久的
+
+
+
+·sql语句包含哪些类型？
+1.数据定义语言：create，alter，drop，declare
+2.数据操纵语言：select，delete，update，insert
+3.数据控制语言：grant，revoke，commit，rollback
+
+
+·什么时视图，有什么作用
+视图时表现数据的逻辑子集或数据的组合。
+视图能够隐藏数据，视图能够将一个复杂的多表查询的结果构成一个简单的表单给用户，视图能够将相同的数据以不同的表格表现给用户。
+
+
+
+·truncate和delete的区别
+相同点：这两个都是只会删除数据而不会删除表
+不同点：truncate时数据库定义的语言，操作立即生效，不会进入回滚，操作不会触发trigger
+
+
+·三大范式
+第一范式1nf：字段具有原子性，不可再分
+第二范式2nf：在第一范式的基础上，要有主键
+第三范式3nf：消除传递依赖，就是各种信息只在一个地方储存，不出现在别的表中，也叫消除冗余；
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

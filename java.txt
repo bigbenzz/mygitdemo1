@@ -1,197 +1,197 @@
-1.�����java��ƽ̨����
-java����ʵ��������java����������У�java���������һ��ģ��ִ�л������ڲ�ͬ�Ĳ���ϵͳ��ӵ�в�ͬ��java�����ʵ�֣�������Щ���������ѭͳһ�Ĺ淶������class�ļ�������class�ļ��е�ָ��ת��Ϊ���ز���ϵͳ��ָ�������ʵ������ͬ��class�ļ�������ƽ̨�ԡ�ͬ���������ֿ�ƽ̨�Ե��ص�jdkҲ�����ֳ�����
+1.请解释java跨平台机制
+java程序实际上是在java虚拟机上运行，java虚拟机类似一个模拟执行环境，在不同的操作系统上拥有不同的java虚拟机实现，但是这些虚拟机都遵循统一的规范来解释class文件，并将class文件中的指令转换为本地操作系统的指令，这样就实现了相同的class文件，即跨平台性。同样的能体现跨平台性的特点jdk也能体现出来。
 
-2.jdk��ʲô
-jdk��JAVA�Ŀ������뻷������������˺ܶ���⡣��jar��������jre jvm ��������ܶ���֮jdk ��java���Կ���������Ĺ��߰�����java�������еĻ���Ҳ�Ǹ���IDE���������Ļ�������sun��˾������Ŀǰ�ѱ�oracle�չ�
+2.jdk是什么
+jdk是JAVA的开发编译环境，里面包含了很多类库。即jar包。还有jre jvm 虚拟机。总而言之jdk 是java语言开发最基础的工具包，是java程序运行的基础也是各种IDE开发环境的基础，由sun公司开发，目前已被oracle收购
 
-3.����Щ������������
-byte short int long float double char boolean���� 
+3.有哪些基本数据类型
+byte short int long float double char boolean八种 
 
-4.String,StringBuffer,StringBuilder���ֵĹ�ϵ
- �ַ������ݲ����������仯������ʹ��String�ࡣ���糣���������������ַ���ƴ�Ӳ����ȡ�����д������ַ������ݽ���ƴ�ӱ���ʹ��String��String֮��� "+"��������Ϊ����������������õ��м���󣬺ķѿռ���ִ��Ч�ʵ��£��½����󣬻��ն��󻰷Ѵ���ʱ�䣩
+4.String,StringBuffer,StringBuilder三种的关系
+ 字符串内容不经常发生变化的优先使用String类。例如常量生命，少量的字符串拼接操作等。如果有大量的字符串内容进行拼接避免使用String与String之间的 "+"操作，因为这样会产生大量无用的中间对象，耗费空间且执行效率低下（新建对象，回收对象话费大量时间）
 
-StringBuffer��Ϊ�˽��������ַ�ƴ�����⣬����һ���̰߳�ȫ�Ŀ��޸��ַ����У�����Ϊ��ˣ��������Ķ���Ŀ�������Ҫ�����ڴ����ַ����㲢���ڶ��߳������£�����xml������http����������װ
+StringBuffer是为了解决上面的字符拼接问题，他是一个线程安全的可修改字符序列，正因为如此，它带来的额外的开销，主要运用在大量字符运算并且在多线程条件下，比如xml解析，http参与解析与封装
 
-StringBuilder���̲߳���ȫ��StringBuffer
-�ܽ᣺
-��������������: ����String
-���̲߳����ַ����������²�����������: ����StringBuilder
-���̲߳����ַ����������²�����������: ����StringBuffer
+StringBuilder是线程不安全的StringBuffer
+总结：
+操作少量的数据: 适用String
+单线程操作字符串缓冲区下操作大量数据: 适用StringBuilder
+多线程操作字符串缓冲区下操作大量数据: 适用StringBuffer
 
-5.����������������
-<1.��װ��������󽫿͹������װ��һ��ʵ�壬���ʵ������࣬ͨ����װ�ܹ�ʹ����������Ժͷ����õ�ͳһ����������������ķ����������ܹ��������ǵķ���Ȩ�ޣ��Ӷ��������ǵ�ʹ�÷�ʽ
-<2.�̳У���֮������ж�Ӧ�Ĺ�ϵ�����м̳о���һ�ֹ�ϵ��һ���������ж�����࣬�������ͨ�����������Ե�Ȩ����֪���ܷ���ø����еķ��������ԣ�ͬ�����еĽӿںͼ̳нӿ�Ҳ�����ּ̳е��ص�
-<3.��̬��������ķ����ܹ��ڲ�ͬ�������в�ͬ�ı��ַ�ʽ����̬���ƾ��в�ͬ�ڲ��ṹ�Ķ����ܹ�������ͬ���ⲿ�ӿڣ������ڲ�ͬ�Ĳ���ȴ����ͨ����ͬ�ķ�ʽȥ���á�Java��̬�����ڼ̳кͽӿ��ϡ�
+5.面向对象的三大特征
+<1.封装：面向对象将客观事物封装成一个实体，这个实体就是类，通过封装能够使类里面的属性和方法得到统一管理，例如类里面的方法和属性能够设置他们的访问权限，从而控制他们的使用方式
+<2.继承：类之间可以有对应的关系，其中继承就是一种关系，一个父类能有多个子类，子类就能通过父类中属性的权限来知道能否调用父类中的方法和属性，同样其中的接口和继承接口也能体现继承的特点
+<3.多态：类里面的方法能够在不同的情形有不同的表现方式，多态机制具有不同内部结构的对象能够共享相同的外部接口，即对于不同的操作却可以通过相同的方式去调用。Java多态表现在继承和接口上。
 
-6.������ͽӿڵ�����
-a. ����������й��췽�����ӿ��в����й��췽����
-b. �������п�������ͨ��Ա�������ӿ���û����ͨ��Ա������
-c. �������п��԰����ǳ�����ͨ�������ӿ��е����з������붼�ǳ���ģ������зǳ���ķ�����
-d. �������еĳ��󷽷��ķ���Ȩ�޿����� public��protected ��(Ĭ�����ͣ���Ȼ eclipse ����������Ҳ�����ã�Ĭ���������಻�ܼ̳�)���ӿ��еĳ��󷽷�ֻ���� public ���͵ģ�����Ĭ�ϼ�Ϊ public abstract ���͡�
-e. �������п��԰�����̬�������� JDK1.8 ֮ǰ�ӿ��в��ܲ�������̬������JDK1.8 �Ժ���԰�����
-f. ������ͽӿ��ж����԰�����̬��Ա�������������еľ�̬��Ա�����ķ���Ȩ�޿���������ģ����ӿ��ж���ı���ֻ���� public static final ���͵ģ�����Ĭ�ϼ�Ϊ public static final ���͡�
-g. һ�������ʵ�ֶ���ӿڣ��ö��Ÿ�������ֻ�ܼ̳�һ�������࣬�ӿڲ�����ʵ�ֽӿڣ������Լ̳нӿڣ����ҿ��Լ̳ж���ӿڣ��ö��Ÿ�����
+6.抽象类和接口的区别
+a. 抽象类可以有构造方法，接口中不能有构造方法。
+b. 抽象类中可以有普通成员变量，接口中没有普通成员变量。
+c. 抽象类中可以包含非抽象普通方法，接口中的所有方法必须都是抽象的，不能有非抽象的方法。
+d. 抽象类中的抽象方法的访问权限可以是 public、protected 和(默认类型，虽然 eclipse 不报错，但也不能用，默认类型子类不能继承)，接口中的抽象方法只能是 public 类型的，并且默认即为 public abstract 类型。
+e. 抽象类中可以包含静态方法，在 JDK1.8 之前接口中不能不包含静态方法，JDK1.8 以后可以包含。
+f. 抽象类和接口中都可以包含静态成员变量，抽象类中的静态成员变量的访问权限可以是任意的，但接口中定义的变量只能是 public static final 类型的，并且默认即为 public static final 类型。
+g. 一个类可以实现多个接口，用逗号隔开，但只能继承一个抽象类，接口不可以实现接口，但可以继承接口，并且可以继承多个接口，用逗号隔开。
 
-7.�򵥽��͹���ģʽ
-����ģʽ�����������һ���ӿڣ���newһ��ʵ����ķ���������ֱ��new��ֻ��Ҫͨ��һ��������ȡ��������������ǹ����ࡣ
-��������ģʽ�кܶ๤����ÿ������ֻ��������һ��һ�ֲ�Ʒ������Ҫ���ֲ�Ʒ����ֱ��ȥ���������ֲ�Ʒ�Ĺ����ͺã����ô����ˡ���Ȼ��һ��ѹ�����һ��ͳһ�Ĺ����ӿڣ���һ��Ѳ�ƷҲ��һ��ͳһ�Ĳ�Ʒ�ӿڡ�
+7.简单解释工厂模式
+工厂模式就是如果你有一个接口，想new一个实现类的方法，不用直接new，只需要通过一个类来获取这个对象，这个类就是工厂类。
+工厂方法模式有很多工厂，每个工厂只能生产单一的一种产品，你想要哪种产品，就直接去找生产那种产品的工厂就好，不用传参了。当然这一大堆工厂有一个统一的工厂接口，这一大堆产品也有一个统一的产品接口。
 
-8.��д���ص�����
-������ͬһ�����еĶ����������ͬ���ǲ�����һ���ķ�����
-��д�Ǹ���ͽӿ����Բ�ͬ�ķ�ʽ�̳л�ʵ�����з���
+8.重写重载的区别
+重载是同一个类中的多个方法名相同但是参数不一样的方法。
+重写是父类和接口类以不同的方式继承或实现其中方法
 
-9.==��equals������
-�����������ͣ�==�ǱȽ�����ֵ�Ƿ���� equals���ܱȽϻ�����������
-�����������ͣ�==�ǱȽϴ����Եĵ�ַ �����������û����дequals����ָ���Ҳ�����Ե�ַ  ������д���˻�����String��Date���ǱȽ���ֵҲ���������ݡ�
-���� Object�е�equals�ǱȽ��ڴ��ַ  String�е�equals�ǱȽ�ֵ
+9.==和equals的区别
+基本数据类型：==是比较其中值是否相等 equals不能比较基本数据类型
+引用数据类型：==是比较此属性的地址 如果数据类型没有重写equals方法指向的也是属性地址  但是重写的了话例如String，Date等是比较其值也就是其内容。
+另外 Object中的equals是比较内存地址  String中的equals是比较值
 
 
-10.�������static��Ҳ�ƾ�̬������ʵ������������
-��ͬ�����ʵ������������ͬ
-���ж����������
-���������ֱ��ͨ������������
+10.类变量（static）也称静态变量和实例变量的区别
+不同对象的实例变量互不相同
+所有对象共享类变量
+类变量可以直接通过类名来调用
 
-11.�����η�
-public�������඼�ܷ���
-protect��ͬ�������������ܹ�����
-friendly��ͬ���ܷ���
-private��ֻ�б����ܷ���
+11.类修饰符
+public：所有类都能访问
+protect：同个包和子孙类能够访问
+friendly：同包能访问
+private：只有本类能访问
 
-12.error��exception������
-error��ϵͳ���ܴ������쳣��һ�㽨����ֹ����
-exception��ϵͳ�ܹ������Ҵ������쳣 
+12.error和exception的区别
+error是系统不能处理的异常，一般建议终止程序
+exception是系统能够捕获并且处理的异常 
 
-13.����ʱ�쳣�ͼ�����쳣��ʲô����
-java������������ṩ���ֿ��׳��쳣��check exception���ܼ���쳣����run-time exception������ʱ�쳣���ʹ���error��
-�ڿɻָ��쳣��exception�����棬��������ʱ�쳣�������Ǽ���쳣������쳣���������ڱ���׶α���io�쳣��sql�쳣����������ȱ�������Ҫ�Ķ����ȷ������쳣��������ʱ�쳣�Ǳ����з������쳣�����ǳ����߼����������������쳣������NullPointException,ClassCastException���쳣��
+13.运行时异常和检查期异常有什么区别
+java程序设计语言提供三种可抛出异常，check exception（受检查异常），run-time exception（运行时异常）和错误（error）
+在可恢复异常（exception）里面，除了运行时异常其他都是检查异常，检查异常往往发生在编译阶段比如io异常和sql异常，都是由于缺少上面必要的东西等发生的异常，而运行时异常是编译中发生的异常，都是程序逻辑或者其他发生的异常，比如NullPointException,ClassCastException等异常。
 
-14.����˵�����ּ�����쳣
-IOException  SqlException ClassNotFoundException NoSuchFileException�ȵ�
+14.至少说出三种检查期异常
+IOException  SqlException ClassNotFoundException NoSuchFileException等等
 
-15.����˵����������ʱ�쳣
+15.至少说出五种运行时异常
 NullPointException  IndexOutBoundsException ClassCastException BufferOverflowException  BufferUnderflowException  CannotRedoException
 
-16.Set��List��ʲô����
-set--��ֵ�������ظ�����������ݽṹ
-list--��ֵ�����ظ�����������ݽṹ
+16.Set和List有什么区别
+set--其值不允许重复，无序的数据结构
+list--其值允许重复，有序的数据结构
 
-17.ArrayList��LinkedList
-ArrayList��������ʵ�ֵ�list��������Ԫ�ؽ��п���������ʣ����ǲ���Ԫ�غ�ɾ��Ԫ���ٶȺ������ʺϱ���Ԫ��
-LinkedList����˳����ʽ������Ż������Բ���Ԫ�غ�ɾ��Ԫ���ʺ���
+17.ArrayList和LinkedList
+ArrayList：有数组实现的list，允许对元素进行快速随机访问，但是插入元素和删除元素速度很慢，适合遍历元素
+LinkedList：对顺序访问进行了优化，所以插入元素和删除元素适合它
 
-18.ʲôʱ����дequals��hashCode
-��дequalsʱҲ����Ҫ��дhashcode
-�������hashset��ʱ�򣬶����hashcode������ȵ���equals��ֵ���ܲ���ȡ�
+18.什么时候重写equals和hashCode
+重写equals时也必须要重写hashcode
+对象进入hashset的时候，对象的hashcode可能相等但是equals的值可能不相等。
 
-19.������ʲô����
-���������ܹ����κ����͵����ݣ����ؽ�������ת�����������Ͱ�ȫ�����ݽṹ����������ɢ��ӳ��
+19.泛型有什么作用
+泛型里面能够放任何类型的数据，不必进行数据转换，具有类型安全的数据结构，如链表，散列映射
 
-20.���к�ջ��ʲô�ص�
-�����Ƚ��ȳ�
-ջ�Ƚ����
+20.队列和栈有什么特点
+队列先进先出
+栈先进后出
 
-21.���������ݽṹ
-���Ͻṹ
-���Խṹ
-���νṹ
-ͼ�νṹ
+21.常见的数据结构
+集合结构
+线性结构
+树形结构
+图形结构
 
-22.java��c++������
-�����������������ԣ���֧�ַ�װ���̳кͶ�̬
-��Java��֧��ָ���������ڴ棬������Ӱ�ȫ
-��Java���ǵ��̳еģ�c++֧�ֶ�̳У�����Java�нӿ�����ʵ�ֶ�̳�
-��Java���Զ����ڴ�������ƣ�����Ҫ����Ա�ֶ��ͷ��ڴ�
+22.java和c++的区别
+·都是面向对象的语言，都支持封装。继承和多态
+·Java不支持指针来访问内存，程序更加安全
+·Java类是单继承的，c++支持多继承，但是Java有接口类来实现多继承
+·Java有自动的内存管理机制，不需要程序员手动释放内存
 
-23.�ַ��ͳ������ַ����ͳ���������
-���ַ�������char���ǵ����������һ���ַ����ַ���������string����˫������������ɸ��ַ�
-���ַ������൱��һ������ֵ��ASCIIֵ�������Բμӱ���ʽ���㣻�ַ�����������һ����ֵַ
-���ַ��ͳ���ֻռ�����ֽڣ��ַ�������ռ���������һ���ַ�
+23.字符型常量和字符串型常量的区别
+·字符常量（char）是单引号引起的一个字符；字符串常量（string）是双引号引起的若干个字符
+·字符常量相当于一个整型值（ASCII值），可以参加表达式运算；字符串常量代表一个地址值
+·字符型常量只占两个字节；字符串型则占多个，至少一个字符
 
-24.����static����ʶ
-��̬��������������֮ǰ�ͻ���ظ÷���������main��������ֻ��ӵ�о�̬����������ӵ�г�Ա�����������ܼ򵥾��������������м���
-��̬��������Ҷ��ܷ��ʵı�����һ������ǰ��Ӹ�final�ؼ����Ա�֤�䲻��
+24.关于static的认识
+静态方法：程序运行之前就会加载该方法，例如main方法，他只能拥有静态变量，不能拥有成员变量，道理很简单就是他会先与运行加载
+静态变量：大家都能访问的变量，一般是在前面加个final关键字以保证其不变
 
-25.super�ؼ���
-��Ϊ�����޷�ֱ�ӵ��ø���Ĺ��췽��������Ҫͨ��super�ؼ��������ã�super���ȥ��ֱ����Object
+25.super关键字
+因为子类无法直接调用父类的构造方法，所以要通过super关键字来调用，super点进去就直接是Object
 
-26.�ӿںͳ�����
-�������ܹ���ʵ�������� �����Ƕ���ĳ���һ�����ģ�塣
-�ӿ�����������ʵ����ʵ��ͬһ������������û�����ֳ��ӿ���д�������ص��ˡ� �ӿ��Ƕ���Ϊ�ĳ���һ����Ϊ�淶��
+26.接口和抽象类
+抽象类能够有实例方法。 抽象是对类的抽象，一种设计模板。
+接口如果遇到多个实现类实现同一个方法这样就没有体现出接口重写方法的特点了。 接口是对行为的抽象，一种行为规范。
 
 
 27.hashcode
-hashcode�����ǻ�ȡ��ϣ��/ɢ���루k-v����Ŀ�ľ�ʱ����¼�����λ�ã������ص���һ��������hashcode��object�У������κ�java�඼�ܵ�����
-�������hashset��ʱ�����Ƚ�������hashcode�������ж��Ƿ����hashset��λ�ã��������ͬ�Ķ��󣬻����equals����һ���ж��Ƿ����hashset��������ˣ������ʹ�������equals��ִ�д�����
+hashcode作用是获取哈希码/散列码（k-v），目的就时来记录对象的位置，他返回的是一个整数，hashcode在object中，所以任何java类都能调用它
+对象进入hashset中时，会先将对象用hashcode计算来判断是否进入hashset的位置，如果有相同的对象，会调用equals来进一步判断是否进入hashset。。。如此，这样就大大减少了equals的执行次数。
 
-28.���췽��
-��������������ͬ
-��û�з���ֵ�����ǲ����ã���������
-��������Ķ����Զ�ִ�У����õ���
-
-
-29.�߳�/����/����
-���̱߳Ƚ���ҪС,Ҳ���Խ��������ͽ���,��ͬ����,ͬ����̶߳���ͬһ���ڴ��ַ��,�����ܹ�����cpu�ĸ���
-�������Ǻ��д����ָ����ļ�,���Կ�����Ϊ���Ǿ�̬��
-�������ǳ����һ��ִ�й���,���Կ��Գ���Ϊ��̬��,Ҳ����˵�����������еĳ���,��һ��������,����,��������һ��һ���Ľ����ڹ���.
+28.构造方法
+·名字与类名相同
+·没有返回值，但是不能用ｖｏｉｄ声明
+·生成类的对象自动执行，不用调用
 
 
+29.线程/程序/进程
+·线程比进程要小,也可以叫它轻量型进程,不同的是,同类的线程都在同一个内存地址中,这样能够减轻cpu的负担
+·程序是含有代码和指令的文件,所以可以认为他是静态的
+·进程是程序的一次执行过程,所以可以称其为动态的,也可以说进程是运行中的程序,从一个程序诞生,运行,消亡都是一个一个的进程在工作.
 
-30.ͨ�����̼���ĺ���
 
-����1��ͨ�� Scanner
+
+30.通过键盘键入的函数
+
+方法1：通过 Scanner
 Scanner input = new Scanner(System.in);
 String s  = input.nextLine();
 input.close();
 
-����2��ͨ�� BufferedReader
+方法2：通过 BufferedReader
 BufferedReader input = new BufferedReader(new InputStreamReader(System.in)); 
 String s = input.readLine();
 
 
-31.Arrays.asList()ʹ��Ҫ��
-�����ܹ�������ת��Ϊһ��List����
-��ת�����֮��,���ĵײ���ʵ��������
-���������е�ֵ��������Ƕ�������
+31.Arrays.asList()使用要点
+·它能够将数组转换为一个List集合
+·转换完成之后,它的底层其实还是数组
+·传入其中的值对象必须是对象数组
 
-32.ForEachʹ��Ҫ��
-���������������remove/add����,�����ǵ������Լ��ķ���
-
-
-
-
-33.IO��
-վ�ڳ���ĽǶȣ�{��������input��
-	       {�������output��
-�����ͷ֣�{�ֽ�����inputstream/outputsteam���κ��ļ���ͨ���ֽڴ���
-	  {�ַ�����Reader/Write���Ǵ��ı��ļ�������ʹ���ַ�����
-
-
-
-34.Serializable���л�
-����Ҫ�ֲ�ʽʱ������Ҫ�ڸ���ģ��֮�䴫��ʱ����Ҫ������ת����Ϊ�ֽ�������ʵ�ִ��䣬�����ΪʲôҪ���л�����
-
-
-
-35.��װ��
-��ĳ�����Ĺ��ܸ������쾡�µı��ֳ���
-
-
-
-36.java��ע�������
-�������� @override
-��������ʹ�� @interface
-�����Ӵ���ɶ��� @override
-�������ĵ� @document
-
-
-
-37.ʵ���̵߳����ַ���
-��ʵ��Runnable�ӿ� //�ܹ�ʵ�������ӿڣ������Ķ���߳�����һ�����󣬶��Ҷ��߳��ܹ�����ͬһ������
-��ʵ��Thread��//�̳�ֻ�ܼ̳���һ���࣬�����Ķ���߳����ڶ������ʹ���̵߳ķ����࣬getid��getname��
+32.ForEach使用要点
+·不能在里面进行remove/add操作,除非是迭代器自己的方法
 
 
 
 
+33.IO流
+站在程序的角度：{输入流（input）
+	       {输出流（output）
+按类型分：{字节流（inputstream/outputsteam）任何文件能通过字节传输
+	  {字符流（Reader/Write）非纯文本文件，不能使用字符传输
+
+
+
+34.Serializable序列化
+当需要分布式时数据需要在各个模块之间传输时，需要将数据转换成为字节流才能实现传输，这就是为什么要序列化。。
+
+
+
+35.包装流
+将某种流的功能更加淋漓尽致的表现出来
+
+
+
+36.java中注解的作用
+·检查编译 @override
+·反射中使用 @interface
+·增加代码可读性 @override
+·生成文档 @document
+
+
+
+37.实现线程的两种方法
+·实现Runnable接口 //能够实现其他接口，启动的多个线程属于一个对象，而且多线程能够访问同一个对象
+·实现Thread类//继承只能继承它一个类，启动的多个线程属于多个对象，使用线程的方法多，getid，getname等
+
+
+
+加油
 
 
 
